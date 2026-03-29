@@ -85,7 +85,7 @@ RUN npm install -g @anthropic-ai/claude-code \
     && echo "Verifying install ..." \
     && echo "javac --version" && javac --version \
     && echo "java --version" && java --version \
-    && echo "Complete".
+    && echo "Complete"
 
 VOLUME /var/lib/docker
 

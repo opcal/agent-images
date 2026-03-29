@@ -82,10 +82,10 @@ ENV JAVA_HOME=/opt/java/openjdk \
 
 RUN npm i -g opencode-ai \
     && which opencode \
-    && echo "Verifying install ..."; \
-    && echo "javac --version" && javac --version; \
-    && echo "java --version" && java --version; \
-    && echo "Complete".
+    && echo "Verifying install ..." \
+    && echo "javac --version" && javac --version \
+    && echo "java --version" && java --version \
+    && echo "Complete"
 
 VOLUME /var/lib/docker
 
