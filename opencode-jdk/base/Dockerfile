@@ -80,12 +80,12 @@ COPY --from=builder /opt/java /opt/java
 ENV JAVA_HOME=/opt/java/openjdk \
     PATH="/opt/java/openjdk/bin:$PATH"
 
-RUN npm i -g opencode-ai; \
-    which opencode; \
-    echo "Verifying install ..."; \
-    echo "javac --version" && javac --version; \
-    echo "java --version" && java --version; \
-    echo "Complete".
+RUN npm i -g opencode-ai \
+    && which opencode \
+    && echo "Verifying install ..."; \
+    && echo "javac --version" && javac --version; \
+    && echo "java --version" && java --version; \
+    && echo "Complete".
 
 VOLUME /var/lib/docker
 

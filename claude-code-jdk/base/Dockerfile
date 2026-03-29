@@ -80,11 +80,12 @@ COPY --from=builder /opt/java /opt/java
 ENV JAVA_HOME=/opt/java/openjdk \
     PATH="/opt/java/openjdk/bin:$PATH"
 
-RUN npm install -g @anthropic-ai/claude-code; \
-    echo Verifying install ... \
-    && echo javac --version && javac --version \
-    && echo java --version && java --version \
-    && echo Complete.
+RUN npm install -g @anthropic-ai/claude-code \
+    && which claude \
+    && echo "Verifying install ..." \
+    && echo "javac --version" && javac --version \
+    && echo "java --version" && java --version \
+    && echo "Complete".
 
 VOLUME /var/lib/docker
 
