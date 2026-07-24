@@ -65,6 +65,7 @@ RUN set -eux; \
         nodejs \
         npm \
         p11-kit \
+        pandoc \
         tzdata \
     ; \
     apt-get clean ; \
