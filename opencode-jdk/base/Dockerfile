@@ -40,7 +40,9 @@ RUN set -eux; \
     apt-get clean ; \
     apt-get -y autoclean ; \
     apt-get -y autoremove ; \
-    rm -rf /var/lib/apt/lists/* ;
+    rm -rf /var/lib/apt/lists/* ; \
+    npm i -g opencode-ai ; \
+    npm cache clean --force 
 
 FROM cruizba/ubuntu-dind:noble-latest
 
@@ -77,12 +79,13 @@ RUN set -eux; \
     mkdir -p /opt/java/openjdk
 
 COPY --from=builder /opt/java /opt/java
+COPY --from=builder /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=builder /usr/local/bin/opencode /usr/local/bin/opencode
 
 ENV JAVA_HOME=/opt/java/openjdk \
     PATH="/opt/java/openjdk/bin:$PATH"
 
-RUN npm i -g opencode-ai \
-    && which opencode \
+RUN which opencode \
     && echo "Verifying install ..." \
     && echo "javac --version" && javac --version \
     && echo "java --version" && java --version \
