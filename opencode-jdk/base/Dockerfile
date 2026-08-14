@@ -7,7 +7,12 @@ ARG JDK_VERSION
 RUN set -eux; \
     DEBIAN_FRONTEND=noninteractive ; \
     apt-get update; \
-    apt-get install -y --no-install-recommends gzip jq tar; \
+    apt-get install -y --no-install-recommends \
+        gzip \
+        jq \
+        nodejs \
+        npm \
+        tar; \
     ARCH="$(dpkg --print-architecture | awk -F- '{ print $NF }')"; \
     case "${ARCH}" in \
         aarch64|arm64) \
