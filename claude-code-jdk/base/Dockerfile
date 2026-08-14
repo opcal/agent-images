@@ -7,7 +7,12 @@ ARG JDK_VERSION
 RUN set -eux; \
     DEBIAN_FRONTEND=noninteractive ; \
     apt-get update; \
-    apt-get install -y --no-install-recommends gzip jq tar; \
+    apt-get install -y --no-install-recommends \
+        gzip \
+        jq \
+        nodejs \
+        npm \
+        tar; \
     ARCH="$(dpkg --print-architecture | awk -F- '{ print $NF }')"; \
     case "${ARCH}" in \
         aarch64|arm64) \
@@ -40,7 +45,9 @@ RUN set -eux; \
     apt-get clean ; \
     apt-get -y autoclean ; \
     apt-get -y autoremove ; \
-    rm -rf /var/lib/apt/lists/* ;
+    rm -rf /var/lib/apt/lists/* ; \
+    npm install -g @anthropic-ai/claude-code ; \
+    npm cache clean --force 
 
 FROM cruizba/ubuntu-dind:noble-latest
 
@@ -77,12 +84,13 @@ RUN set -eux; \
     mkdir -p /opt/java/openjdk
 
 COPY --from=builder /opt/java /opt/java
+COPY --from=builder /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=builder /usr/local/bin/claude /usr/local/bin/claude
 
 ENV JAVA_HOME=/opt/java/openjdk \
     PATH="/opt/java/openjdk/bin:$PATH"
 
-RUN npm install -g @anthropic-ai/claude-code \
-    && which claude \
+RUN which claude \
     && echo "Verifying install ..." \
     && echo "javac --version" && javac --version \
     && echo "java --version" && java --version \
