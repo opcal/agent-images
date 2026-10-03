@@ -1,4 +1,4 @@
-FROM ghcr.io/opcal/ubuntu:noble AS builder
+FROM ghcr.io/opcal/ubuntu:resolute AS builder
 
 LABEL org.opencontainers.image.authors="opcal@outlook.com"
 
