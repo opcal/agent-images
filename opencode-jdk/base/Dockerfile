@@ -92,6 +92,7 @@ ENV JAVA_HOME=/opt/java/openjdk \
 
 RUN which opencode \
     && echo "Verifying install ..." \
+    && echo "opencode -v" && opencode -v \
     && echo "javac --version" && javac --version \
     && echo "java --version" && java --version \
     && echo "Complete"

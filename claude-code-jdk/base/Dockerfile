@@ -92,6 +92,7 @@ ENV JAVA_HOME=/opt/java/openjdk \
 
 RUN which claude \
     && echo "Verifying install ..." \
+    && echo "claude -v" && claude -v \
     && echo "javac --version" && javac --version \
     && echo "java --version" && java --version \
     && echo "Complete"
