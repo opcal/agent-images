@@ -46,7 +46,7 @@ RUN set -eux; \
     apt-get -y autoclean ; \
     apt-get -y autoremove ; \
     rm -rf /var/lib/apt/lists/* ; \
-    npm i -g opencode-ai ; \
+    npm install -g @opencode/cli ; \
     npm cache clean --force 
 
 FROM cruizba/ubuntu-dind:noble-latest
